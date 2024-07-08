@@ -6,6 +6,10 @@ form.addEventListener('submit', (e)=>{
     getWordInfo(from.elements[0].value);
 });
 
-const getWordInfo = (word) => {
-    alert("Word:" + word);
+const getWordInfo = async (word) => {
+    const response = fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    const data = await response.json();
+
+    resultDiv.innerHTML = `<h2>${data[0].meanings[0].definitions[0].definition}</h2>`;
+    console.log(data);
 }
